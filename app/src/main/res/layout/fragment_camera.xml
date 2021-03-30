@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.jasvir.localgalleryapp.ui.camera.CameraViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/cameraFragmentCameraLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:visibility="@{viewModel.isCameraVisible? View.VISIBLE: View.GONE}"
+            tools:visibility="visible">
+
+            <!-- Camera -->
+            <com.otaliastudios.cameraview.CameraView
+                android:id="@+id/cameraFragmentCamera"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:keepScreenOn="true"
+                app:cameraAudio="off"
+                app:cameraExperimental="true"
+                app:cameraFacing="back"
+                app:cameraFlash="off"
+                app:cameraGestureLongTap="none"
+                app:cameraGesturePinch="zoom"
+                app:cameraGestureScrollHorizontal="exposureCorrection"
+                app:cameraGestureScrollVertical="none"
+                app:cameraGrid="off"
+                app:cameraHdr="off"
+                app:cameraMode="picture"
+                app:cameraPlaySounds="true"
+                app:cameraWhiteBalance="auto"
+                app:onPhotoTaken="@{(x) -> viewModel.photoTaken(x)}" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginBottom="40dp" />
+
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/cameraFragmentTakeShotButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="top|end"
+                android:layout_marginBottom="30dp"
+                android:background="@mipmap/photo_button"
+                android:onClick="@{() -> viewModel.takePhoto()}" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/cameraFragmentPreviewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:visibility="@{viewModel.isCameraVisible? View.GONE: View.VISIBLE}"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/cameraFragmentPreviewIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:imageSource="@{viewModel.photo}" />
+
+            <View
+                android:id="@+id/cropArea"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cameraFragmentPreviewIV"
+                app:layout_constraintDimensionRatio="4.5:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.jasvir.localgalleryapp.ui.camera.DragRectView
+                android:id="@+id/dragRect"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/cameraFragmentConfirmButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{() -> viewModel.saveRetake(true)}"
+                    android:src="@drawable/ic_check_48dp" />
+
+
+                <ImageButton
+                    android:id="@+id/cameraFragmentRotateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{() -> viewModel.rotateImage()}"
+                    android:src="@drawable/ic_crop_rotate_48dp" />
+
+                <ImageButton
+                    android:id="@+id/cameraFragmentCropButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{() -> viewModel.crop()}"
+                    android:src="@drawable/ic_crop_24dp" />
+
+                <ImageButton
+                    android:id="@+id/cameraFragmentRetakeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{() -> viewModel.saveRetake(false)}"
+                    android:src="@drawable/ic_clear_48dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

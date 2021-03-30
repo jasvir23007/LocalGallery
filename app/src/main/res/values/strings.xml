@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">PicGalleryApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    // General
+    <string name="no_internet_message">No internet connection. To fetch data, please, connect to the internet.</string>
+    <string name="ok">Ok</string>
+    <string name="permit">Permit</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_default">Something went wrong</string>
+    <string name="error_default_db">Something went wrong with database</string>
+    <string name="no_internet_connection_title">No internet connection</string>
+    <string name="no_internet_connection_text">Something is wrong with your internet connection</string>
+    <string name="no_internet_connection_text_2">Something is wrong with your internet connection. Please check it.</string>
+
+    // Gallery
+    <string name="take_photo">Take photo</string>
+    <string name="pick_image">Pick image</string>
+    <string name="delete_images">Delete images</string>
+    <string name="camera_permission">Camera permission</string>
+    <string name="permit_warning">App needs camera permission to work. If you deny the permission app is useless. If you choose never ask again you will need to grant camera permission through the app settings.</string>
+    <string name="permit_warning_2">App needs camera permission to work. Go to settings to allow the camera permission?</string>
+
+    // Camera
+    <string name="inside_image">Frame must be inside image!</string>
+
+</resources>

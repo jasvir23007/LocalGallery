@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="imageUri"
+            type="com.jasvir.localgalleryapp.data.models.ImageUri" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="viewModel"
+            type="com.jasvir.localgalleryapp.ui.gallery.GalleryViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/allPhotosLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/rounded_corners">
+
+        <RelativeLayout
+            android:id="@+id/galleryItemImageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_corners"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/galleryItemIv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:keepScreenOn="true"
+                android:scaleType="fitXY"
+                android:onClick="@{() -> viewModel.imageClick(position, imageUri.uri)}"
+                app:imageSourceGallery="@{imageUri.uri}" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>
